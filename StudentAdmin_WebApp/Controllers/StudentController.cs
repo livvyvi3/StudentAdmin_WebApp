@@ -104,14 +104,16 @@ namespace StudentAdmin_WebApp.Controllers
                 {
                     conn.Open();
                     string updateStudent = $"UPDATE Student SET student_name = {mystudent.student_name}, specialization = {mystudent.specialization}, " +
-                        $"qualification = {mystudent.qualification}, courses = {mystudent.courses}";
+                        $"qualification = {mystudent.qualification}, courses = {mystudent.courses} WHERE student_id = {id}";
                     SqlCommand cmd = new SqlCommand(updateStudent, conn);
+
                     cmd.Parameters.Add(new SqlParameter(@"student_name", mystudent.student_name));
                     cmd.Parameters.Add(new SqlParameter(@"specialization", mystudent.specialization));
                     cmd.Parameters.Add(new SqlParameter(@"qualification", mystudent.qualification));
                     cmd.Parameters.Add(new SqlParameter(@"courses", mystudent.courses));
 
                     cmd.ExecuteNonQuery();
+                    conn.Close();
                 }
 
                 return RedirectToAction("Index");
@@ -130,7 +132,7 @@ namespace StudentAdmin_WebApp.Controllers
                 conn.Open();
                 string delStudent = $"delete from student where student_id = {id} ";
                 SqlCommand cmd = new SqlCommand(delStudent, conn);
-                cmd.Parameters.Add(new SqlParameter(@"student_id", id));
+                cmd.Parameters.AddWithValue(@"student_id", id);
                 cmd.ExecuteNonQuery();
             }
             return RedirectToAction("Index");

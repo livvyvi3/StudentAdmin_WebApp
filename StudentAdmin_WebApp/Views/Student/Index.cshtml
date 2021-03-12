@@ -10,6 +10,8 @@
         <td>Specialization</td>
         <td>Qualification</td>
         <td>Courses</td>
+        <td>Edit</td>
+        <td>Delete</td>
     </tr>
     @for (int i = 0; i < Model.Rows.Count; i++)
     {
@@ -18,8 +20,8 @@
     <td>@Model.Rows[i][2]</td>
     <td>@Model.Rows[i][3]</td>
     <td>@Model.Rows[i][4]</td>
-    <td><a href="@Url.Action("Edit", "Student", new { @student_id = Model.Rows[i][0] })">Edit</a></td>
-    <td><a href="@Url.Action("Delete", "Student", new { @student_id = Model.Rows[i][0] })">Delete</a></td>
+    <td><a href="@Url.Action("Edit", "Student", new { @id = Model.Rows[i][0] })">Edit</a></td>
+    <td><a href="@Url.Action("Delete", "Student", new { @id = Model.Rows[i][0] })">Delete</a></td>
 </tr>
     }
 
